@@ -53,7 +53,7 @@ public class Vision {
 	    double[] means = {0.0, 0.0, 0.0};
 	    mean = new Scalar(means);
 	    output_layers = new ArrayList<>();
-	    size = new Size(1024, image_size);
+	    size = new Size(image_size, image_size);
 	    current_dir = System.getProperty("user.dir");
 	    model_weights = "D:\\NvidiaCourse\\models\\yolov3.weights";
 	    System.out.println(model_weights) ;
