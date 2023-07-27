@@ -53,7 +53,7 @@ public class Vision {
 	    double[] means = {0.0, 0.0, 0.0};
 	    mean = new Scalar(means);
 	    output_layers = new ArrayList<>();
-	    size = new Size(image_size, image_size);
+	    size = new Size(960, 640);
 	    current_dir = System.getProperty("user.dir");
 	    model_weights = "D:\\NvidiaCourse\\models\\yolov3.weights";
 	    System.out.println(model_weights) ;
@@ -105,7 +105,7 @@ public class Vision {
 	private void loadImage() {
 	    Mat img = Imgcodecs.imread(input_path);
 	    Mat resizedImage = new Mat();
-	    Imgproc.resize(img, resizedImage, size, 1, 1);
+	    Imgproc.resize(img, resizedImage, size, 0.9, 0.9);
 	    height = resizedImage.height();
 	    width = resizedImage.width();
 	    channels = resizedImage.channels();
@@ -123,12 +123,13 @@ public class Vision {
 	
 	private void getBoxDimensions() {
 	    for (Mat output : outputs) {
-
 	        for (int i = 0; i < output.height(); i++) {
 	            Mat row = output.row(i);
 	            MatOfFloat temp = new MatOfFloat(row);
 	            List<Float> detect = temp.toList();
-	            List<Float> score = detect.subList(5, 85);
+	            //System.out.println(detect);
+	            List<Float> score = detect.subList(5, 6);
+	            //System.out.println(score.size());
 	            int class_id = argmax(score);
 	            float conf = score.get(class_id);
 	            if (conf >= 0.4) {
