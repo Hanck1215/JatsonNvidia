@@ -3,28 +3,17 @@
     <head>
         <meta charset="UTF-8">
         <title>檔案上傳和下載</title>
-        <meta name="description" content="提供定位腦瘤位置的服務">
-        <link rel="icon" type="image/png" href="images/favicon.png">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSS -->
-        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Philosopher" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
-		<div id="upload-space">
-            <form th:if="${uploaded == false}" th:action="@{/upload/upload_sumit}" method="post" enctype="multipart/form-data">
-                <p>
-                    <label for="file1">請選擇要上傳的檔案</label>
-                    <input type="file" di="file1" name="file">
-                </p>
-                <p>
-                    <input type="submit" value="上傳">
-                </p>
-            </form>
-        </div>
-        
+        <form th:if="${uploaded == false}" th:action="@{/upload/upload_sumit}" method="post" enctype="multipart/form-data">
+            <p>
+                <label for="file1">請選擇要上傳的檔案</label>
+                <input type="file" di="file1" name="file">
+            </p>
+            <p>
+                <input type="submit" value="上傳">
+            </p>
+        </form>
         <p th:if="${uploaded == true}">上傳成功</p>
         <form th:if="${uploaded == true}" th:action="@{http://localhost:8080/upload/detect}" method="post">
             <input type="submit" value="偵測">

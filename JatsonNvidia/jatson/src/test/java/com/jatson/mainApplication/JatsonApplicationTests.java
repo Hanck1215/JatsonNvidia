@@ -1,44 +1,23 @@
 package com.jatson.mainApplication;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.StringWriter;
-
-import javax.script.ScriptContext;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineFactory;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
-import javax.script.SimpleScriptContext;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Base64;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Configuration;
-
-
 
 @SpringBootTest
 class JatsonApplicationTests {
 
 	@Test
-	void contextLoads() {
-		try {
-
-	         // print a message
-	         System.out.println("Executing notepad.exe");
-
-	         // create a process and execute notepad.exe
-	         Process process = Runtime.getRuntime().exec("mkdir D:/Directory1");
-
-	         // print another message
-	         System.out.println();
-
-	      } catch (Exception ex) {
-	         ex.printStackTrace();
-	      }
+	void contextLoads() throws IOException {
+		String current_dir = System.getProperty("user.dir");
+		File fi = new File(current_dir+"\\src\\main\\resources\\static\\upload\\DetectedImg\\detectedImg.png");
+		byte[] bytes = Files.readAllBytes(fi.toPath());
+		String base64Img = Base64.getEncoder().encodeToString(bytes) ;
+		System.out.println(base64Img) ;
 	}
+
 }
